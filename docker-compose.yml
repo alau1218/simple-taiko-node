@@ -93,7 +93,7 @@ services:
       - prover
 
   taiko_client_proposer:
-    image: us-docker.pkg.dev/evmchain/images/taiko-client:taiko-alethia-client-v0.43.1
+    image: docker.io/alau1218/based-rollups:v0.43.1
     restart: unless-stopped
     pull_policy: always
     depends_on:
