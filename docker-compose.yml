@@ -93,12 +93,15 @@ services:
       - prover
 
   taiko_client_proposer:
-    image: docker.io/alau1218/based-rollups:v0.43.1
+    image: docker.io/alau1218/based-rollups:v0.43.2
     restart: unless-stopped
     pull_policy: always
+    platform: linux/arm64
     depends_on:
       - l2_execution_engine
       - taiko_client_driver
+    ports:
+      - "${PORT_L2_PROPOSER_METRICS:-6061}:6061"
     env_file:
       - .env
     volumes:

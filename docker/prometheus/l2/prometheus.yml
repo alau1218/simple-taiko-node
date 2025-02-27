@@ -17,3 +17,6 @@ scrape_configs:
     static_configs:
       - targets:
           - l2_execution_engine:6060
+          - taiko_client_proposer:6061
+          
+  

@@ -11,7 +11,10 @@ if [ "$ENABLE_PROPOSER" = "true" ]; then
         --taikoToken ${TAIKO_TOKEN_L1_ADDRESS}
         --jwtSecret /data/taiko-geth/geth/jwtsecret
         --l1.proposerPrivKey ${L1_PROPOSER_PRIVATE_KEY}
-        --l2.suggestedFeeRecipient ${L2_SUGGESTED_FEE_RECIPIENT}"
+        --l2.suggestedFeeRecipient ${L2_SUGGESTED_FEE_RECIPIENT}
+        --metrics
+        --metrics.addr 0.0.0.0
+        --metrics.port ${PORT_L2_PROPOSER_METRICS}"
 
     if [ -z "$L1_ENDPOINT_WS" ]; then
         echo "Error: L1_ENDPOINT_WS must be non-empty"
@@ -92,8 +95,9 @@ if [ "$ENABLE_PROPOSER" = "true" ]; then
     if [ -n "$TX_SEND_TIMEOUT" ]; then
         ARGS="${ARGS} --tx.sendTimeout ${TX_SEND_TIMEOUT}"
     fi
-
-
+    # Print out all arguments that will be passed to taiko-client proposer
+    echo "Starting taiko-client proposer with the following arguments:"
+    echo "${ARGS}"
     exec taiko-client proposer ${ARGS}
 else
     echo "PROPOSER IS DISABLED"
